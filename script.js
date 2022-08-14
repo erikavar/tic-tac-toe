@@ -1,39 +1,38 @@
-// board
+// populating board (just "X" for now) and putting marks into an array
 const Gameboard = (() => {
-    let gameBoard = ["","","","","","","","",""];
+    let arr = ["","","","","","","","",""];
    
-
     const markSpot = document.querySelectorAll(".spot");
     markSpot.forEach((div) => {
         div.addEventListener("click", () => {
-            Gameboard.forEach((item, index) => {
-                /*if (div.id === Gameboard[index] === 1) {
-                    Gameboard[1] = "X";
-                }*/
-                console.log(item[index]);
+            arr.forEach((item, index) => {
+                if (div.id === index.toString() && arr[index] === "") {
+                    arr[index] = "X";
+                }
+                return arr;
             });
             div.textContent = "X";
-            console.log(gameBoard);
-            console.log(div.id);
+            console.log(arr);
         });;
     });
+    return arr;
 
-    return gameBoard;
-
-})();
-
-// populating the board using content from above
-const Game = (() => {
-    let board = document.getElementById("boardContainer");
-    Gameboard.forEach((item, index) => {
-        /*const div = document.createElement("div");
-        div.setAttribute("class", "square");
-        div.textContent = item;
-        board.appendChild(div);*/
-    });
 })();
 
 // factory function for players
 const Player = (name, symbol, score) => {
-    return { name, symbol, score }
+    const playerWins = () => console.log(`${name} wins!`);
+    return { name, symbol, score, playerWins }
 };
+
+// checking for wins and alternating players each turn
+const Game = (() => {
+
+    const player1 = Player("Player 1", "X", 0);
+    const player2 = Player("Player 2", "O", 0);
+
+    // array for order, need to insert somthing every time board is clicked
+    // then based on whether length is even or odd we can determine whose turn it is
+    let playOrderArr = [];
+
+})();
