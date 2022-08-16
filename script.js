@@ -1,4 +1,4 @@
-// populating board (just "X" for now) and putting marks into an array
+// adding placeholder to array every time corresponding spot is clicked
 const Gameboard = (() => {
     let arr = ["","","","","","","","",""];
    
@@ -17,16 +17,18 @@ const Gameboard = (() => {
 })();
 
 // factory function for players
-const Player = (name, symbol, score) => {
-    const playerWins = () => console.log(`${name} wins!`);
-    return { name, symbol, score, playerWins }
+const Player = (name, symbol) => {
+    const playerWins = () => {
+        console.log(`${name} wins!`);
+    }
+    return { name, symbol, playerWins }
 };
 
-// checking for wins and alternating players each turn
+// alternating players each turn + checking for wins
 const Game = (() => {
 
-    const player1 = Player("Player 1", "X", 0);
-    const player2 = Player("Player 2", "O", 0);
+    const player1 = Player("Player 1", "X");
+    const player2 = Player("Player 2", "O");
 
     // use arr from Gameboard to check if even or odd number of marks have been made
     // even? player 1's turn. odd? player 2's turn
@@ -40,7 +42,6 @@ const Game = (() => {
                 if (Gameboard[index] !== "") {
                     count += 1;
                 }
-                console.log(count);
                 return count;
             });
             if (count % 2 === 0) {
@@ -49,8 +50,9 @@ const Game = (() => {
                 turn = "Player 2";
             }
             count = 0;
-            console.log(turn);
 
+            // whose turn it is will determine which symbol should be placed in the array
+            // and which symbol should be displayed on the board
             if (turn === "Player 1") {
                 div.textContent = player2.symbol;
                 Gameboard.forEach((item, index) => {
@@ -66,42 +68,61 @@ const Game = (() => {
                     }
                 });
             }
-            console.log(Gameboard);
 
-            Gameboard.forEach((item, index) => {
-                // **** change this - doesn't limit to a row ****
-                if (Gameboard[index] === Gameboard[index + 1] && Gameboard[index] === Gameboard [index + 2]) {
-                    if (Gameboard[index] === player1.symbol) {
-                        player1.playerWins();
-                    } else if (Gameboard[index] === player2.symbol) {
-                        player2.playerWins();
-                    }
+            // check for winner of round
+            if (Gameboard[0] === Gameboard[1] && Gameboard[0] === Gameboard[2]) {
+                if (Gameboard[0] === player1.symbol) {
+                    player1.playerWins();
+                } else if (Gameboard[0] === player2.symbol) {
+                    player2.playerWins();
                 }
-            });
+            } else if (Gameboard[3] === Gameboard[4] && Gameboard[3] === Gameboard[5]) {
+                if (Gameboard[3] === player1.symbol) {
+                    player1.playerWins();
+                } else if (Gameboard[3] === player2.symbol) {
+                    player2.playerWins();
+                }
+            } else if (Gameboard[6] === Gameboard[7] && Gameboard[6] === Gameboard[8]) {
+                if (Gameboard[6] === player1.symbol) {
+                    player1.playerWins();
+                } else if (Gameboard[6] === player2.symbol) {
+                    player2.playerWins();
+                }
+            } else if (Gameboard[0] === Gameboard[3] && Gameboard[0] === Gameboard[6]) {
+                if (Gameboard[0] === player1.symbol) {
+                    player1.playerWins();
+                } else if (Gameboard[0] === player2.symbol) {
+                    player2.playerWins();
+                }
+            } else if (Gameboard[1] === Gameboard[4] && Gameboard[1] === Gameboard[7]) {
+                if (Gameboard[1] === player1.symbol) {
+                    player1.playerWins();
+                } else if (Gameboard[1] === player2.symbol) {
+                    player2.playerWins();
+                }
+            } else if (Gameboard[2] === Gameboard[5] && Gameboard[2] === Gameboard[8]) {
+                if (Gameboard[2] === player1.symbol) {
+                    player1.playerWins();
+                } else if (Gameboard[2] === player2.symbol) {
+                    player2.playerWins();
+                }
+            } else if (Gameboard[0] === Gameboard[4] && Gameboard[0] === Gameboard [8]) {
+                if (Gameboard[0] === player1.symbol) {
+                    player1.playerWins();
+                } else if (Gameboard[0] === player2.symbol) {ß
+                    player2.playerWins();
+                }
+            } else if (Gameboard[2] === Gameboard[4] && Gameboard[2] === Gameboard [6]) {
+                if (Gameboard[2] === player1.symbol) {
+                    player1.playerWins();
+                } else if (Gameboard[2] === player2.symbol) {
+                    player2.playerWins();
+                }
+            } else if (Gameboard[0] !== "" && Gameboard[1] !== "" && Gameboard[2] !== "" 
+                    && Gameboard[3] !== "" && Gameboard[4] !== "" && Gameboard[5] !== ""
+                    && Gameboard[6] !== "" && Gameboard[7] !== "" && Gameboard[8] !== "") {
+                console.log("It's a tie!");
+            }
         });
     });
-
-    /*const winner = () => {
-        if (Gameboard[0] === Gameboard[1] && Gameboard[1] === Gameboard [2]) {
-            if (Gameboard[0] === player1.symbol) {
-                player1.playerWins();
-            } else if (Gameboard[0] === player2.symbol) {
-                player2.playerWins();
-            }
-        }
-    };*/
-
-
-    /*Gameboard.forEach((item, index) => {
-        if (Gameboard[index] === "X") {
-            count += 1;
-        }
-        console.log(count);
-        return count;
-    });
-    if (count % 2 === 0) {
-        turn = 1;
-    } else {
-        turn = 2;
-    }*/
 })();
