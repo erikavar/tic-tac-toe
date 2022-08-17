@@ -70,58 +70,34 @@ const Game = (() => {
             }
 
             // check for winner of round
-            if (Gameboard[0] === Gameboard[1] && Gameboard[0] === Gameboard[2]) {
+
+            if ((Gameboard[0] === Gameboard[1] && Gameboard[0] === Gameboard[2]) 
+                || (Gameboard[0] === Gameboard[3] && Gameboard[0] === Gameboard[6])) {
                 if (Gameboard[0] === player1.symbol) {
                     player1.playerWins();
                 } else if (Gameboard[0] === player2.symbol) {
                     player2.playerWins();
                 }
-            } else if (Gameboard[3] === Gameboard[4] && Gameboard[3] === Gameboard[5]) {
-                if (Gameboard[3] === player1.symbol) {
+            } else if ((Gameboard[0] === Gameboard[4] && Gameboard[0] === Gameboard[8]) 
+                || (Gameboard[3] === Gameboard[4] && Gameboard[3] === Gameboard[5])
+                || (Gameboard[1] === Gameboard[4] && Gameboard[1] === Gameboard[7])
+                || (Gameboard[2] === Gameboard[4] && Gameboard[2] === Gameboard [6])) {
+                if (Gameboard[4] === player1.symbol) {
                     player1.playerWins();
-                } else if (Gameboard[3] === player2.symbol) {
+                } else if (Gameboard[4] === player2.symbol) {
                     player2.playerWins();
                 }
-            } else if (Gameboard[6] === Gameboard[7] && Gameboard[6] === Gameboard[8]) {
-                if (Gameboard[6] === player1.symbol) {
+            } else if ((Gameboard[6] === Gameboard[7] && Gameboard[6] === Gameboard[8])
+                || (Gameboard[2] === Gameboard[5] && Gameboard[2] === Gameboard[8])) {
+                if (Gameboard[8] === player1.symbol) {
                     player1.playerWins();
-                } else if (Gameboard[6] === player2.symbol) {
-                    player2.playerWins();
-                }
-            } else if (Gameboard[0] === Gameboard[3] && Gameboard[0] === Gameboard[6]) {
-                if (Gameboard[0] === player1.symbol) {
-                    player1.playerWins();
-                } else if (Gameboard[0] === player2.symbol) {
-                    player2.playerWins();
-                }
-            } else if (Gameboard[1] === Gameboard[4] && Gameboard[1] === Gameboard[7]) {
-                if (Gameboard[1] === player1.symbol) {
-                    player1.playerWins();
-                } else if (Gameboard[1] === player2.symbol) {
-                    player2.playerWins();
-                }
-            } else if (Gameboard[2] === Gameboard[5] && Gameboard[2] === Gameboard[8]) {
-                if (Gameboard[2] === player1.symbol) {
-                    player1.playerWins();
-                } else if (Gameboard[2] === player2.symbol) {
-                    player2.playerWins();
-                }
-            } else if (Gameboard[0] === Gameboard[4] && Gameboard[0] === Gameboard [8]) {
-                if (Gameboard[0] === player1.symbol) {
-                    player1.playerWins();
-                } else if (Gameboard[0] === player2.symbol) {ß
-                    player2.playerWins();
-                }
-            } else if (Gameboard[2] === Gameboard[4] && Gameboard[2] === Gameboard [6]) {
-                if (Gameboard[2] === player1.symbol) {
-                    player1.playerWins();
-                } else if (Gameboard[2] === player2.symbol) {
+                } else if (Gameboard[8] === player2.symbol) {
                     player2.playerWins();
                 }
             } else if (Gameboard[0] !== "" && Gameboard[1] !== "" && Gameboard[2] !== "" 
                     && Gameboard[3] !== "" && Gameboard[4] !== "" && Gameboard[5] !== ""
                     && Gameboard[6] !== "" && Gameboard[7] !== "" && Gameboard[8] !== "") {
-                console.log("It's a tie!");
+                    console.log("It's a tie!");
             }
         });
     });
