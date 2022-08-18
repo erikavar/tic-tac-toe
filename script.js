@@ -2,8 +2,8 @@
 const Gameboard = (() => {
     let arr = ["","","","","","","","",""];
    
-    const markSpot = document.querySelectorAll(".spot");
-    markSpot.forEach((div) => {
+    const clicked = document.querySelectorAll(".spot");
+    clicked.forEach((div) => {
         div.addEventListener("click", () => {
             arr.forEach((item, index) => {
                 if (div.id === index.toString() && arr[index] === "") {
@@ -13,13 +13,28 @@ const Gameboard = (() => {
             });
         });
     });
-    return arr;
+
+    const gameOver = () => {
+        arr = ["","","","","","","","",""];
+        clicked.forEach((div) => {
+            div.textContent = "";
+        });
+    };
+
+    return { arr, clicked, gameOver };
 })();
 
 // factory function for players
 const Player = (name, symbol) => {
     const playerWins = () => {
         console.log(`${name} wins!`);
+        Gameboard.clicked.forEach((div) => {
+            div.replaceWith(div.cloneNode(true));
+        });
+
+        document.querySelector("button").addEventListener("click", () => {
+            Gameboard.gameOver();
+        });
     }
     return { name, symbol, playerWins }
 };
@@ -30,16 +45,15 @@ const Game = (() => {
     const player1 = Player("Player 1", "X");
     const player2 = Player("Player 2", "O");
 
-    // use arr from Gameboard to check if even or odd number of marks have been made
+    // use arr from Gameboard.arr to check if even or odd number of marks have been made
     // even? player 1's turn. odd? player 2's turn
     let count = 0;
     let turn;
 
-    const clicked = document.querySelectorAll(".spot");
-    clicked.forEach((div) => {
+    Gameboard.clicked.forEach((div) => {
         div.addEventListener("click", () => {
-            Gameboard.forEach((item, index) => {
-                if (Gameboard[index] !== "") {
+            Gameboard.arr.forEach((item, index) => {
+                if (Gameboard.arr[index] !== "") {
                     count += 1;
                 }
                 return count;
@@ -55,48 +69,48 @@ const Game = (() => {
             // and which symbol should be displayed on the board
             if (turn === "Player 1") {
                 div.textContent = player2.symbol;
-                Gameboard.forEach((item, index) => {
+                Gameboard.arr.forEach((item, index) => {
                     if (div.id === index.toString()) {
-                        Gameboard[index] = player2.symbol;
+                        Gameboard.arr[index] = player2.symbol;
                     }
                 });
             } else if (turn === "Player 2") {
                 div.textContent = player1.symbol;
-                Gameboard.forEach((item, index) => {
+                Gameboard.arr.forEach((item, index) => {
                     if (div.id === index.toString()) {
-                        Gameboard[index] = player1.symbol;
+                        Gameboard.arr[index] = player1.symbol;
                     }
                 });
             }
 
             // check for winner of round
 
-            if ((Gameboard[0] === Gameboard[1] && Gameboard[0] === Gameboard[2]) 
-                || (Gameboard[0] === Gameboard[3] && Gameboard[0] === Gameboard[6])) {
-                if (Gameboard[0] === player1.symbol) {
+            if ((Gameboard.arr[0] === Gameboard.arr[1] && Gameboard.arr[0] === Gameboard.arr[2]) 
+                || (Gameboard.arr[0] === Gameboard.arr[3] && Gameboard.arr[0] === Gameboard.arr[6])) {
+                if (Gameboard.arr[0] === player1.symbol) {
                     player1.playerWins();
-                } else if (Gameboard[0] === player2.symbol) {
+                } else if (Gameboard.arr[0] === player2.symbol) {
                     player2.playerWins();
                 }
-            } else if ((Gameboard[0] === Gameboard[4] && Gameboard[0] === Gameboard[8]) 
-                || (Gameboard[3] === Gameboard[4] && Gameboard[3] === Gameboard[5])
-                || (Gameboard[1] === Gameboard[4] && Gameboard[1] === Gameboard[7])
-                || (Gameboard[2] === Gameboard[4] && Gameboard[2] === Gameboard [6])) {
-                if (Gameboard[4] === player1.symbol) {
+            } else if ((Gameboard.arr[0] === Gameboard.arr[4] && Gameboard.arr[0] === Gameboard.arr[8]) 
+                || (Gameboard.arr[3] === Gameboard.arr[4] && Gameboard.arr[3] === Gameboard.arr[5])
+                || (Gameboard.arr[1] === Gameboard.arr[4] && Gameboard.arr[1] === Gameboard.arr[7])
+                || (Gameboard.arr[2] === Gameboard.arr[4] && Gameboard.arr[2] === Gameboard.arr [6])) {
+                if (Gameboard.arr[4] === player1.symbol) {
                     player1.playerWins();
-                } else if (Gameboard[4] === player2.symbol) {
+                } else if (Gameboard.arr[4] === player2.symbol) {
                     player2.playerWins();
                 }
-            } else if ((Gameboard[6] === Gameboard[7] && Gameboard[6] === Gameboard[8])
-                || (Gameboard[2] === Gameboard[5] && Gameboard[2] === Gameboard[8])) {
-                if (Gameboard[8] === player1.symbol) {
+            } else if ((Gameboard.arr[6] === Gameboard.arr[7] && Gameboard.arr[6] === Gameboard.arr[8])
+                || (Gameboard.arr[2] === Gameboard.arr[5] && Gameboard.arr[2] === Gameboard.arr[8])) {
+                if (Gameboard.arr[8] === player1.symbol) {
                     player1.playerWins();
-                } else if (Gameboard[8] === player2.symbol) {
+                } else if (Gameboard.arr[8] === player2.symbol) {
                     player2.playerWins();
                 }
-            } else if (Gameboard[0] !== "" && Gameboard[1] !== "" && Gameboard[2] !== "" 
-                    && Gameboard[3] !== "" && Gameboard[4] !== "" && Gameboard[5] !== ""
-                    && Gameboard[6] !== "" && Gameboard[7] !== "" && Gameboard[8] !== "") {
+            } else if (Gameboard.arr[0] !== "" && Gameboard.arr[1] !== "" && Gameboard.arr[2] !== "" 
+                    && Gameboard.arr[3] !== "" && Gameboard.arr[4] !== "" && Gameboard.arr[5] !== ""
+                    && Gameboard.arr[6] !== "" && Gameboard.arr[7] !== "" && Gameboard.arr[8] !== "") {
                     console.log("It's a tie!");
             }
         });
