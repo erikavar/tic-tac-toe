@@ -14,26 +14,36 @@ const Gameboard = (() => {
         });
     });
 
-    const gameOver = () => {
-        arr = ["","","","","","","","",""];
-        clicked.forEach((div) => {
-            div.textContent = "";
-        });
-    };
-
-    return { arr, clicked, gameOver };
+    return { arr, clicked/*, gameOver*/ };
 })();
 
 // factory function for players
 const Player = (name, symbol) => {
     const playerWins = () => {
         console.log(`${name} wins!`);
-        Gameboard.clicked.forEach((div) => {
+        
+        // This won't work bc it prevents restarting a game:
+        /*Gameboard.clicked.forEach((div) => {
             div.replaceWith(div.cloneNode(true));
-        });
+        });*/
+        
+        // This won't work bc I still need to add logic to prevent
+        // players from playing in spots that are already taken
+        // ...I think
+        /*Gameboard.arr.forEach((item, index) => {
+            if (Gameboard.arr[index] === "") {
+                Gameboard.arr[index] = "blank";
+            }
+            console.log(Gameboard.arr);
+            return Gameboard.arr;
+        });*/
 
         document.querySelector("button").addEventListener("click", () => {
-            Gameboard.gameOver();
+            Gameboard.arr = ["","","","","","","","",""];
+            allSquares = document.querySelectorAll(".spot");
+            allSquares.forEach((div) => {
+                div.textContent = "";
+            });
         });
     }
     return { name, symbol, playerWins }
@@ -85,29 +95,29 @@ const Game = (() => {
 
             // check for winner of round
 
-            if ((Gameboard.arr[0] === Gameboard.arr[1] && Gameboard.arr[0] === Gameboard.arr[2]) 
-                || (Gameboard.arr[0] === Gameboard.arr[3] && Gameboard.arr[0] === Gameboard.arr[6])) {
-                if (Gameboard.arr[0] === player1.symbol) {
-                    player1.playerWins();
-                } else if (Gameboard.arr[0] === player2.symbol) {
-                    player2.playerWins();
-                }
-            } else if ((Gameboard.arr[0] === Gameboard.arr[4] && Gameboard.arr[0] === Gameboard.arr[8]) 
+            if ((Gameboard.arr[0]!=="") && ((Gameboard.arr[0] === Gameboard.arr[1] && Gameboard.arr[0] === Gameboard.arr[2]) 
+                || (Gameboard.arr[0] === Gameboard.arr[3] && Gameboard.arr[0] === Gameboard.arr[6]))) {
+                    if (Gameboard.arr[0] === player1.symbol) {
+                        player1.playerWins();
+                    } else if (Gameboard.arr[0] === player2.symbol) {
+                        player2.playerWins();
+                    }
+            } else if ((Gameboard.arr[4]!=="") && ((Gameboard.arr[0] === Gameboard.arr[4] && Gameboard.arr[0] === Gameboard.arr[8]) 
                 || (Gameboard.arr[3] === Gameboard.arr[4] && Gameboard.arr[3] === Gameboard.arr[5])
                 || (Gameboard.arr[1] === Gameboard.arr[4] && Gameboard.arr[1] === Gameboard.arr[7])
-                || (Gameboard.arr[2] === Gameboard.arr[4] && Gameboard.arr[2] === Gameboard.arr [6])) {
-                if (Gameboard.arr[4] === player1.symbol) {
-                    player1.playerWins();
-                } else if (Gameboard.arr[4] === player2.symbol) {
-                    player2.playerWins();
-                }
-            } else if ((Gameboard.arr[6] === Gameboard.arr[7] && Gameboard.arr[6] === Gameboard.arr[8])
-                || (Gameboard.arr[2] === Gameboard.arr[5] && Gameboard.arr[2] === Gameboard.arr[8])) {
-                if (Gameboard.arr[8] === player1.symbol) {
-                    player1.playerWins();
-                } else if (Gameboard.arr[8] === player2.symbol) {
-                    player2.playerWins();
-                }
+                || (Gameboard.arr[2] === Gameboard.arr[4] && Gameboard.arr[2] === Gameboard.arr [6]))) {
+                    if (Gameboard.arr[4] === player1.symbol) {
+                        player1.playerWins();
+                    } else if (Gameboard.arr[4] === player2.symbol) {
+                        player2.playerWins();
+                    }
+            } else if ((Gameboard.arr[8]!=="") && ((Gameboard.arr[6] === Gameboard.arr[7] && Gameboard.arr[6] === Gameboard.arr[8])
+                || (Gameboard.arr[2] === Gameboard.arr[5] && Gameboard.arr[2] === Gameboard.arr[8]))) {
+                    if (Gameboard.arr[8] === player1.symbol) {
+                        player1.playerWins();
+                    } else if (Gameboard.arr[8] === player2.symbol) {
+                        player2.playerWins();
+                    }
             } else if (Gameboard.arr[0] !== "" && Gameboard.arr[1] !== "" && Gameboard.arr[2] !== "" 
                     && Gameboard.arr[3] !== "" && Gameboard.arr[4] !== "" && Gameboard.arr[5] !== ""
                     && Gameboard.arr[6] !== "" && Gameboard.arr[7] !== "" && Gameboard.arr[8] !== "") {
@@ -115,4 +125,6 @@ const Game = (() => {
             }
         });
     });
+
+
 })();
