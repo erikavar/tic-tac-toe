@@ -14,7 +14,7 @@ const Gameboard = (() => {
         });
     });
 
-    return { arr, clicked/*, gameOver*/ };
+    return { arr, clicked };
 })();
 
 // factory function for players
@@ -23,21 +23,10 @@ const Player = (name, symbol) => {
         console.log(`${name} wins!`);
         
         // This won't work bc it prevents restarting a game:
-        /*Gameboard.clicked.forEach((div) => {
+        Gameboard.clicked.forEach((div) => {
             div.replaceWith(div.cloneNode(true));
-        });*/
+        });
         
-        // This won't work bc I still need to add logic to prevent
-        // players from playing in spots that are already taken
-        // ...I think
-        /*Gameboard.arr.forEach((item, index) => {
-            if (Gameboard.arr[index] === "") {
-                Gameboard.arr[index] = "blank";
-            }
-            console.log(Gameboard.arr);
-            return Gameboard.arr;
-        });*/
-
         document.querySelector("button").addEventListener("click", () => {
             Gameboard.arr = ["","","","","","","","",""];
             allSquares = document.querySelectorAll(".spot");
@@ -69,25 +58,25 @@ const Game = (() => {
                 return count;
             });
             if (count % 2 === 0) {
-                turn = "Player 1";
-            } else {
                 turn = "Player 2";
+            } else {
+                turn = "Player 1";
             }
             count = 0;
 
             // whose turn it is will determine which symbol should be placed in the array
             // and which symbol should be displayed on the board
-            if (turn === "Player 1") {
+            if ((turn === "Player 2") && (div.textContent === String.fromCharCode(160))) {
                 div.textContent = player2.symbol;
                 Gameboard.arr.forEach((item, index) => {
-                    if (div.id === index.toString()) {
+                    if (div.id === index.toString() && Gameboard.arr[index] === "placeholder") {
                         Gameboard.arr[index] = player2.symbol;
                     }
                 });
-            } else if (turn === "Player 2") {
+            } else if ((turn === "Player 1") && (div.textContent === String.fromCharCode(160))) {
                 div.textContent = player1.symbol;
                 Gameboard.arr.forEach((item, index) => {
-                    if (div.id === index.toString()) {
+                    if (div.id === index.toString() && Gameboard.arr[index] === "placeholder") {
                         Gameboard.arr[index] = player1.symbol;
                     }
                 });
@@ -123,8 +112,8 @@ const Game = (() => {
                     && Gameboard.arr[6] !== "" && Gameboard.arr[7] !== "" && Gameboard.arr[8] !== "") {
                     console.log("It's a tie!");
             }
+            console.log(Gameboard.arr);
         });
     });
-
 
 })();
