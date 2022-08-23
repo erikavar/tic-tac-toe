@@ -36,10 +36,10 @@ const Gameboard = (() => {
         let count = 0;
         let turn;
 
-        Gameboard.clicked.forEach((div) => {
+        clicked.forEach((div) => {
             div.addEventListener("click", () => {
-                Gameboard.arr.forEach((item, index) => {
-                    if (Gameboard.arr[index] !== "") {
+                arr.forEach((item, index) => {
+                    if (arr[index] !== "") {
                         count += 1;
                     }
                     return count;
@@ -53,67 +53,67 @@ const Gameboard = (() => {
 
                 // whose turn it is will determine which symbol should be placed in the array
                 // and which symbol should be displayed on the board
-                if ((turn === "Player 2") && (div.textContent === String.fromCharCode(160))) {
+                if ((turn === "Player 2") && (div.textContent === String.fromCharCode(160) || div.textContent == "")) {
                     div.textContent = player2.symbol;
-                    Gameboard.arr.forEach((item, index) => {
-                        if (div.id === index.toString() && Gameboard.arr[index] === "placeholder") {
-                            Gameboard.arr[index] = player2.symbol;
+                    arr.forEach((item, index) => {
+                        if (div.id === index.toString() && arr[index] === "placeholder") {
+                            arr[index] = player2.symbol;
                         }
                     });
-                } else if ((turn === "Player 1") && (div.textContent === String.fromCharCode(160))) {
+                } else if ((turn === "Player 1") && (div.textContent === String.fromCharCode(160) || div.textContent == "")) {
                     div.textContent = player1.symbol;
-                    Gameboard.arr.forEach((item, index) => {
-                        if (div.id === index.toString() && Gameboard.arr[index] === "placeholder") {
-                            Gameboard.arr[index] = player1.symbol;
+                    arr.forEach((item, index) => {
+                        if (div.id === index.toString() && arr[index] === "placeholder") {
+                            arr[index] = player1.symbol;
                         }
                     });
                 }
 
                 // check for winner of round
 
-                if ((Gameboard.arr[0]!=="") && ((Gameboard.arr[0] === Gameboard.arr[1] && Gameboard.arr[0] === Gameboard.arr[2]) 
-                    || (Gameboard.arr[0] === Gameboard.arr[3] && Gameboard.arr[0] === Gameboard.arr[6]))) {
-                        if (Gameboard.arr[0] === player1.symbol) {
+                if ((arr[0]!=="") && ((arr[0] === arr[1] && arr[0] === arr[2]) 
+                    || (arr[0] === arr[3] && arr[0] === arr[6]))) {
+                        if (arr[0] === player1.symbol) {
                             player1.playerWins();
-                        } else if (Gameboard.arr[0] === player2.symbol) {
+                        } else if (arr[0] === player2.symbol) {
                             player2.playerWins();
                         }
-                } else if ((Gameboard.arr[4]!=="") && ((Gameboard.arr[0] === Gameboard.arr[4] && Gameboard.arr[0] === Gameboard.arr[8]) 
-                    || (Gameboard.arr[3] === Gameboard.arr[4] && Gameboard.arr[3] === Gameboard.arr[5])
-                    || (Gameboard.arr[1] === Gameboard.arr[4] && Gameboard.arr[1] === Gameboard.arr[7])
-                    || (Gameboard.arr[2] === Gameboard.arr[4] && Gameboard.arr[2] === Gameboard.arr [6]))) {
-                        if (Gameboard.arr[4] === player1.symbol) {
+                } else if ((arr[4]!=="") && ((arr[0] === arr[4] && arr[0] === arr[8]) 
+                    || (arr[3] === arr[4] && arr[3] === arr[5])
+                    || (arr[1] === arr[4] && arr[1] === arr[7])
+                    || (arr[2] === arr[4] && arr[2] === arr [6]))) {
+                        if (arr[4] === player1.symbol) {
                             player1.playerWins();
-                        } else if (Gameboard.arr[4] === player2.symbol) {
+                        } else if (arr[4] === player2.symbol) {
                             player2.playerWins();
                         }
-                } else if ((Gameboard.arr[8]!=="") && ((Gameboard.arr[6] === Gameboard.arr[7] && Gameboard.arr[6] === Gameboard.arr[8])
-                    || (Gameboard.arr[2] === Gameboard.arr[5] && Gameboard.arr[2] === Gameboard.arr[8]))) {
-                        if (Gameboard.arr[8] === player1.symbol) {
+                } else if ((arr[8]!=="") && ((arr[6] === arr[7] && arr[6] === arr[8])
+                    || (arr[2] === arr[5] && arr[2] === arr[8]))) {
+                        if (arr[8] === player1.symbol) {
                             player1.playerWins();
-                        } else if (Gameboard.arr[8] === player2.symbol) {
+                        } else if (arr[8] === player2.symbol) {
                             player2.playerWins();
                         }
-                } else if (Gameboard.arr[0] !== "" && Gameboard.arr[1] !== "" && Gameboard.arr[2] !== "" 
-                        && Gameboard.arr[3] !== "" && Gameboard.arr[4] !== "" && Gameboard.arr[5] !== ""
-                        && Gameboard.arr[6] !== "" && Gameboard.arr[7] !== "" && Gameboard.arr[8] !== "") {
+                } else if (arr[0] !== "" && arr[1] !== "" && arr[2] !== "" 
+                        && arr[3] !== "" && arr[4] !== "" && arr[5] !== ""
+                        && arr[6] !== "" && arr[7] !== "" && arr[8] !== "") {
                         console.log("It's a tie!");
                 }
-                //console.log(Gameboard.arr);
             });
         });
 
     }
 
     const resetGame = () => {
-        Gameboard.arr = ["","","","","","","","",""];
-        allSquares = document.querySelectorAll(".spot");
-        allSquares.forEach((div) => {
+        arr.forEach((item, index) => {
+            arr[index] = "";
+        });
+        clicked.forEach((div) => {
             div.textContent = "";
         });
     }
 
-    return { arr, addPlaceholders, clicked, playGame, resetGame };
+    return { arr, addPlaceholders, playGame, resetGame };
 })();
 
 
@@ -125,81 +125,6 @@ const Game = (() => {
 
     document.querySelector("button").addEventListener("click", () => {
         Gameboard.resetGame();
-        Gameboard.addPlaceholders();
-        Gameboard.playGame();
-        console.log(Gameboard.arr);
     });
-
-    // use arr from Gameboard.arr to check if even or odd number of marks have been made
-    // even? player 1's turn. odd? player 2's turn
-    /*let count = 0;
-    let turn;
-
-    Gameboard.clicked.forEach((div) => {
-        div.addEventListener("click", () => {
-            Gameboard.arr.forEach((item, index) => {
-                if (Gameboard.arr[index] !== "") {
-                    count += 1;
-                }
-                return count;
-            });
-            if (count % 2 === 0) {
-                turn = "Player 2";
-            } else {
-                turn = "Player 1";
-            }
-            count = 0;
-
-            // whose turn it is will determine which symbol should be placed in the array
-            // and which symbol should be displayed on the board
-            if ((turn === "Player 2") && (div.textContent === String.fromCharCode(160))) {
-                div.textContent = player2.symbol;
-                Gameboard.arr.forEach((item, index) => {
-                    if (div.id === index.toString() && Gameboard.arr[index] === "placeholder") {
-                        Gameboard.arr[index] = player2.symbol;
-                    }
-                });
-            } else if ((turn === "Player 1") && (div.textContent === String.fromCharCode(160))) {
-                div.textContent = player1.symbol;
-                Gameboard.arr.forEach((item, index) => {
-                    if (div.id === index.toString() && Gameboard.arr[index] === "placeholder") {
-                        Gameboard.arr[index] = player1.symbol;
-                    }
-                });
-            }
-
-            // check for winner of round
-
-            if ((Gameboard.arr[0]!=="") && ((Gameboard.arr[0] === Gameboard.arr[1] && Gameboard.arr[0] === Gameboard.arr[2]) 
-                || (Gameboard.arr[0] === Gameboard.arr[3] && Gameboard.arr[0] === Gameboard.arr[6]))) {
-                    if (Gameboard.arr[0] === player1.symbol) {
-                        player1.playerWins();
-                    } else if (Gameboard.arr[0] === player2.symbol) {
-                        player2.playerWins();
-                    }
-            } else if ((Gameboard.arr[4]!=="") && ((Gameboard.arr[0] === Gameboard.arr[4] && Gameboard.arr[0] === Gameboard.arr[8]) 
-                || (Gameboard.arr[3] === Gameboard.arr[4] && Gameboard.arr[3] === Gameboard.arr[5])
-                || (Gameboard.arr[1] === Gameboard.arr[4] && Gameboard.arr[1] === Gameboard.arr[7])
-                || (Gameboard.arr[2] === Gameboard.arr[4] && Gameboard.arr[2] === Gameboard.arr [6]))) {
-                    if (Gameboard.arr[4] === player1.symbol) {
-                        player1.playerWins();
-                    } else if (Gameboard.arr[4] === player2.symbol) {
-                        player2.playerWins();
-                    }
-            } else if ((Gameboard.arr[8]!=="") && ((Gameboard.arr[6] === Gameboard.arr[7] && Gameboard.arr[6] === Gameboard.arr[8])
-                || (Gameboard.arr[2] === Gameboard.arr[5] && Gameboard.arr[2] === Gameboard.arr[8]))) {
-                    if (Gameboard.arr[8] === player1.symbol) {
-                        player1.playerWins();
-                    } else if (Gameboard.arr[8] === player2.symbol) {
-                        player2.playerWins();
-                    }
-            } else if (Gameboard.arr[0] !== "" && Gameboard.arr[1] !== "" && Gameboard.arr[2] !== "" 
-                    && Gameboard.arr[3] !== "" && Gameboard.arr[4] !== "" && Gameboard.arr[5] !== ""
-                    && Gameboard.arr[6] !== "" && Gameboard.arr[7] !== "" && Gameboard.arr[8] !== "") {
-                    console.log("It's a tie!");
-            }
-            //console.log(Gameboard.arr);
-        });
-    });*/
 
 })();
