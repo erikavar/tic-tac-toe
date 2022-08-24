@@ -1,21 +1,29 @@
 html {
-    background-color: rgb(45, 45, 45);
+    background-color: #b6c199;
+    color: #703f37;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 #boardContainer {
+    margin-top: 100px;
     height: 300px;
     width: 300px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    place-items: center;
-    grid-gap: 1px;
+    grid-gap: 3px;
 }
 
 .spot {
     background-color: white;
-    width: 100%;
-    height: 100%;
+    width: 98px;
+    height: 65px;
+    font-weight: 900;
     text-align: center;
+    padding-top: 33px;
     font-size: x-large;
 }
 
@@ -23,3 +31,32 @@ html {
     cursor: pointer;
 }
 
+button {
+    font-family: 'Roboto', sans-serif;
+    border: none;
+    background-color: #c29591;
+    color: white;
+    padding: 10px 20px;
+}
+
+button:hover {
+    background-color: #c8b7a6;
+}
+
+button:active {
+    background-color: #703f37
+}
+
+/*
+
+Beige: #c8b7a6
+
+Blue: #7d94b5
+
+Rose: #c29591
+
+Maroon: #703f37
+
+Green: #b6c199
+
+*/
