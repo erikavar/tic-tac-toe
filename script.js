@@ -2,18 +2,16 @@
 const Player = (name, symbol) => {
     const playerWins = () => {
         console.log(`${name} wins!`);
-
-
     }
     return { name, symbol, playerWins }
 };
 
-// adding placeholder to array every time corresponding spot is clicked
 const Gameboard = (() => {
     let arr = ["","","","","","","","",""];
    
     const clicked = document.querySelectorAll(".spot");
 
+    // adding placeholder to array every time corresponding spot is clicked
     const addPlaceholders = () => {
         clicked.forEach((div) => {
             div.addEventListener("click", () => {
@@ -32,16 +30,22 @@ const Gameboard = (() => {
         
         const player1 = Player("Player 1", "X");
         const player2 = Player("Player 2", "O");
+
+        const gameWon = () => {
+           //player1.symbol = "";
+           //player2.symbol = "";
+        }
         
         let count = 0;
         let turn;
 
+        // using array with placeholders to determine whose turn it is
         clicked.forEach((div) => {
             div.addEventListener("click", () => {
                 arr.forEach((item, index) => {
                     if (arr[index] !== "") {
                         count += 1;
-                    }
+                    } 
                     return count;
                 });
                 if (count % 2 === 0) {
@@ -75,8 +79,10 @@ const Gameboard = (() => {
                     || (arr[0] === arr[3] && arr[0] === arr[6]))) {
                         if (arr[0] === player1.symbol) {
                             player1.playerWins();
+                            gameWon();
                         } else if (arr[0] === player2.symbol) {
                             player2.playerWins();
+                            gameWon();
                         }
                 } else if ((arr[4]!=="") && ((arr[0] === arr[4] && arr[0] === arr[8]) 
                     || (arr[3] === arr[4] && arr[3] === arr[5])
@@ -84,15 +90,19 @@ const Gameboard = (() => {
                     || (arr[2] === arr[4] && arr[2] === arr [6]))) {
                         if (arr[4] === player1.symbol) {
                             player1.playerWins();
+                            gameWon();
                         } else if (arr[4] === player2.symbol) {
                             player2.playerWins();
+                            gameWon();
                         }
                 } else if ((arr[8]!=="") && ((arr[6] === arr[7] && arr[6] === arr[8])
                     || (arr[2] === arr[5] && arr[2] === arr[8]))) {
                         if (arr[8] === player1.symbol) {
                             player1.playerWins();
+                            gameWon();
                         } else if (arr[8] === player2.symbol) {
                             player2.playerWins();
+                            gameWon();
                         }
                 } else if (arr[0] !== "" && arr[1] !== "" && arr[2] !== "" 
                         && arr[3] !== "" && arr[4] !== "" && arr[5] !== ""
@@ -101,13 +111,10 @@ const Gameboard = (() => {
                 }
             });
         });
-
     }
 
     const resetGame = () => {
-        arr.forEach((item, index) => {
-            arr[index] = "";
-        });
+        arr = ["","","","","","","","",""];
         clicked.forEach((div) => {
             div.textContent = "";
         });
