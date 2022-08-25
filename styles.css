@@ -31,7 +31,7 @@ html {
     cursor: pointer;
 }
 
-button {
+.resetter {
     font-family: 'Roboto', sans-serif;
     border: none;
     background-color: #c29591;
@@ -44,6 +44,37 @@ button:hover {
 }
 
 button:active {
+    background-color: #703f37
+}
+
+.winnerPopup {
+    background: #7d94b5;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    height: 200px;
+    width: 350px;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 0 30px 30px;
+    visibility: hidden;
+}
+
+.winnerPopup button {
+    font-family: 'Roboto', sans-serif;
+    border: none;
+    background-color: #c8b7a6;
+    color: white;
+    padding: 10px 20px;
+    position: relative;
+    bottom: -10px;
+}
+
+.winnerPopup button:hover {
+    background-color: #c29591;
+}
+
+.winnerPopup button:active {
     background-color: #703f37
 }
 
