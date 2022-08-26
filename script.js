@@ -1,15 +1,39 @@
 // factory function for players
 const Player = (name, symbol) => {
+    
+    const announcement = document.querySelector(".winnerPopup");
+
     const playerWins = () => {
         setTimeout(() => {
-            alert(`${name} wins!`);
+            announcement.classList.add("openWinnerPopup");
+            document.querySelector(".winText").textContent = `${name} wins! 🎉`;
         }, 300);
+
         document.querySelector(".resetter").textContent = "PLAY AGAIN";
+
+        document.querySelectorAll(".spot").forEach((div) => {
+            div.classList.add("noClicksAllowed");
+        });
+
+        document.querySelector(".close").addEventListener("click", function() {
+            announcement.classList.remove("openWinnerPopup");
+        });
+
+        document.querySelector(".pa").addEventListener("click", function() {
+            arr = ["","","","","","","","",""];
+            document.querySelectorAll(".spot").forEach((div) => {
+                div.textContent = "";
+                div.classList.remove("noClicksAllowed");
+            });
+            announcement.classList.remove("openWinnerPopup");
+        });
+
     }
 
     const playersTied = () => {
         setTimeout(() => {
-            alert("It's a tie!");
+            document.querySelector(".winnerPopup").classList.add("openWinnerPopup");
+            document.querySelector(".winText").textContent = "It's a tie!";
         }, 300);
         document.querySelector(".resetter").textContent = "PLAY AGAIN";
     }
@@ -128,6 +152,7 @@ const Gameboard = (() => {
         arr = ["","","","","","","","",""];
         clicked.forEach((div) => {
             div.textContent = "";
+            div.classList.remove("noClicksAllowed");
         });
     }
 

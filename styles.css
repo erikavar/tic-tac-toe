@@ -27,6 +27,10 @@ html {
     font-size: x-large;
 }
 
+.noClicksAllowed {
+    pointer-events: none;
+}
+
 .spot:hover {
     cursor: pointer;
 }
@@ -49,15 +53,28 @@ button:active {
 
 .winnerPopup {
     background: #7d94b5;
-    position: fixed;
-    top: 30%;
+    position: absolute;
+    top: 0%;
     left: 50%;
-    height: 200px;
-    width: 350px;
     transform: translate(-50%, -50%);
     text-align: center;
     padding: 0 30px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     visibility: hidden;
+}
+
+.openWinnerPopup {
+    visibility: visible;
+    top: 30%;
+    height: 200px;
+    width: 350px;
+}
+
+.winnerPopup .winText {
+    color: white;
+    font-weight: 900;
+    font-size: 30px;
+    margin-top:20%;
 }
 
 .winnerPopup button {
@@ -66,8 +83,10 @@ button:active {
     background-color: #c8b7a6;
     color: white;
     padding: 10px 20px;
+    margin-top: 20px;
     position: relative;
     bottom: -10px;
+    width: 150px;
 }
 
 .winnerPopup button:hover {
