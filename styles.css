@@ -43,11 +43,72 @@ html {
     padding: 10px 20px;
 }
 
-button:hover {
+.resetter:hover {
     background-color: #c8b7a6;
 }
 
-button:active {
+.resetter:active {
+    background-color: #703f37
+}
+
+.namePopup {
+    color: white;
+    background: #c29591;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 0 30px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 100vw;
+    visibility: visible;
+}
+
+.hideNamePopup {
+    visibility: hidden;
+}
+
+.enterNames{
+    font-size: 20px;
+    padding: 15px 5px;
+    margin-top: 10px;
+}
+
+.playerName {
+    padding: 8px 0px;
+}
+
+input {
+    border: none;
+    margin-left: 10px;
+    height: 28px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+}
+
+input:active {
+   outline: none;
+}
+
+.startGame {
+    font-family: 'Roboto', sans-serif;
+    border: 1px solid white;
+    background-color: #c29591;
+    color: white;
+    padding: 10px 15px;
+    margin-top: 20px;
+    position: relative;
+    bottom: -10px;
+    width: 120px;
+}
+
+.startGame:hover {
+    background-color: #c8b7a6;
+    
+}
+
+.startGame:active {
     background-color: #703f37
 }
 
@@ -68,6 +129,7 @@ button:active {
     top: 30%;
     height: 200px;
     width: 350px;
+    transition: all .5s ease-in-out;
 }
 
 .winnerPopup .winText {
