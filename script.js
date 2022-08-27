@@ -1,33 +1,14 @@
 // factory function for players
 const Player = (name, symbol) => {
     
-    const announcement = document.querySelector(".winnerPopup");
+    const winnerPopup = document.querySelector(".winnerPopup");
+    const winText = document.querySelector(".winText");
 
     const playerWins = () => {
         setTimeout(() => {
-            announcement.classList.add("openWinnerPopup");
+            winnerPopup.classList.add("openWinnerPopup");
             document.querySelector(".winText").textContent = `${name} wins! 🎉`;
         }, 300);
-
-        document.querySelector(".resetter").textContent = "PLAY AGAIN";
-
-        document.querySelectorAll(".spot").forEach((div) => {
-            div.classList.add("noClicksAllowed");
-        });
-
-        document.querySelector(".close").addEventListener("click", function() {
-            announcement.classList.remove("openWinnerPopup");
-        });
-
-        document.querySelector(".pa").addEventListener("click", function() {
-            arr = ["","","","","","","","",""];
-            document.querySelectorAll(".spot").forEach((div) => {
-                div.textContent = "";
-                div.classList.remove("noClicksAllowed");
-            });
-            announcement.classList.remove("openWinnerPopup");
-        });
-
     }
 
     const playersTied = () => {
@@ -35,7 +16,6 @@ const Player = (name, symbol) => {
             document.querySelector(".winnerPopup").classList.add("openWinnerPopup");
             document.querySelector(".winText").textContent = "It's a tie!";
         }, 300);
-        document.querySelector(".resetter").textContent = "PLAY AGAIN";
     }
 
     return { name, symbol, playerWins, playersTied }
@@ -45,6 +25,10 @@ const Gameboard = (() => {
     let arr = ["","","","","","","","",""];
    
     const clicked = document.querySelectorAll(".spot");
+
+    document.querySelector(".startGame").addEventListener("click", function() {
+        document.querySelector(".namePopup").classList.add("hideNamePopup");
+    });
 
     // adding placeholder to array every time corresponding spot is clicked
     const addPlaceholders = () => {
@@ -61,16 +45,43 @@ const Gameboard = (() => {
         });
     }
 
-    const playGame = () => {
+    const gameWon = () => { 
+
+        // makes some elements unclickable when the game is won
+
+        const resetterBtn = document.querySelector(".resetter");
+        const winnerPopup =  document.querySelector(".winnerPopup");
+
+        resetterBtn.textContent = "PLAY AGAIN";
+        resetterBtn.classList.add("noClicksAllowed");
+
+        clicked.forEach((div) => {
+            div.classList.add("noClicksAllowed");
+        });
+
+        document.querySelector(".close").addEventListener("click", function() {
+            winnerPopup.classList.remove("openWinnerPopup");
+            resetterBtn.classList.remove("noClicksAllowed");
+        });
         
+        document.querySelector(".playAgain").addEventListener("click", function() {
+            arr = ["","","","","","","","",""];
+            clicked.forEach((div) => {
+                div.textContent = "";
+                div.classList.remove("noClicksAllowed");
+            });
+            winnerPopup.classList.remove("openWinnerPopup");
+            resetterBtn.textContent = "RESET";
+            resetterBtn.classList.remove("noClicksAllowed");
+        });
+
+    }
+
+    const playGame = () => {
+
         const player1 = Player("Player 1", "X");
         const player2 = Player("Player 2", "O");
 
-        const gameWon = () => {
-           //player1.symbol = "";
-           //player2.symbol = "";
-        }
-        
         let count = 0;
         let turn;
 
