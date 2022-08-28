@@ -26,8 +26,11 @@ const Gameboard = (() => {
    
     const clicked = document.querySelectorAll(".spot");
 
-    document.querySelector(".startGame").addEventListener("click", function() {
-        document.querySelector(".namePopup").classList.add("hideNamePopup");
+    const displayTurn = document.querySelector(".turnDisplayer");
+
+    // stop form with player names from submitting (to avoid page refresh)
+    document.querySelector(".nameForm").addEventListener("click", function(e) {
+        e.preventDefault();
     });
 
     // adding placeholder to array every time corresponding spot is clicked
@@ -41,7 +44,6 @@ const Gameboard = (() => {
                     return arr;
                 });
             });
-            return clicked;
         });
     }
 
@@ -73,14 +75,28 @@ const Gameboard = (() => {
             winnerPopup.classList.remove("openWinnerPopup");
             resetterBtn.textContent = "RESET";
             resetterBtn.classList.remove("noClicksAllowed");
+            displayTurn.textContent = `${player1.name} starts`;
         });
+
+        // get rid of turn displayer text
+        displayTurn.textContent="";
 
     }
 
     const playGame = () => {
 
-        const player1 = Player("Player 1", "X");
-        const player2 = Player("Player 2", "O");
+        let player1;
+        let player2;
+
+        //name popup
+        document.querySelector(".startGame").addEventListener("click", function() {
+            document.querySelector(".namePopup").classList.add("hideNamePopup");
+        
+            player1 = Player(document.getElementById("player1name").value, "X");
+            player2 = Player(document.getElementById("player2name").value, "O");
+
+            displayTurn.textContent = `${player1.name} starts`
+        });
 
         let count = 0;
         let turn;
@@ -96,8 +112,10 @@ const Gameboard = (() => {
                 });
                 if (count % 2 === 0) {
                     turn = "Player 2";
+                    displayTurn.textContent = `${player1.name}'s turn`
                 } else {
                     turn = "Player 1";
+                    displayTurn.textContent = `${player2.name}'s turn`
                 }
                 count = 0;
 
@@ -154,6 +172,7 @@ const Gameboard = (() => {
                         && arr[3] !== "" && arr[4] !== "" && arr[5] !== ""
                         && arr[6] !== "" && arr[7] !== "" && arr[8] !== "") {
                         player1.playersTied();
+                        gameWon();
                 }
             });
         });
