@@ -35,6 +35,14 @@ html {
     cursor: pointer;
 }
 
+.turnDisplayer {
+    border: 3px solid white;
+    width: 300px;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .resetter {
     font-family: 'Roboto', sans-serif;
     border: none;

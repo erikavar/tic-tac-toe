@@ -75,11 +75,9 @@ const Gameboard = (() => {
             winnerPopup.classList.remove("openWinnerPopup");
             resetterBtn.textContent = "RESET";
             resetterBtn.classList.remove("noClicksAllowed");
-            displayTurn.textContent = `${player1.name} starts`;
         });
 
-        // get rid of turn displayer text
-        displayTurn.textContent="";
+        displayTurn.textContent = "GAME OVER";
 
     }
 
@@ -88,6 +86,14 @@ const Gameboard = (() => {
         let player1;
         let player2;
 
+        document.querySelector(".playAgain").addEventListener("click", function() {
+            displayTurn.textContent = `${player1.name} starts`;
+        });
+
+        document.querySelector(".resetter").addEventListener("click", function() {
+            displayTurn.textContent = `${player1.name} starts`;
+        });
+        
         //name popup
         document.querySelector(".startGame").addEventListener("click", function() {
             document.querySelector(".namePopup").classList.add("hideNamePopup");
