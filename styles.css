@@ -41,6 +41,7 @@ html {
     color: white;
     padding-top: 10px;
     padding-bottom: 10px;
+    font-weight: 700;
 }
 
 .resetter {
@@ -78,9 +79,19 @@ html {
 }
 
 .enterNames{
-    font-size: 20px;
-    padding: 15px 5px;
+    font-size: 25px;
     margin-top: 10px;
+    font-weight: 700;
+}
+
+.instructions {
+    font-size: 20x;
+    font-weight: 400;
+    font-style: italic;
+    border: 1px dashed white;
+    width: 300px;
+    position: relative;
+    left: 35%;
 }
 
 .playerName {

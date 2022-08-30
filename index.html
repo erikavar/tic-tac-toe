@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles.css"></link>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="boardContainer">
@@ -29,14 +29,15 @@
 
     <div class="namePopup">
         <form class="nameForm" >
-            <div class="enterNames">Enter player names and start a game!</div>
+            <div class="enterNames">Enter player names to start a game of tic tac toe!</div>
+            <div class="instructions">Player X starts ☝️ <br> Symbols will switch each round 🔄</div>
             <div class="playerName">
                 <label for="player1name">Player X</label>
-                <input type="text" id="player1name" name="player1name" placeholder="Enter name"><br>
+                <input type="text" id="player1name" name="player1name" placeholder="Enter name" required><br>
             </div>
             <div class="playerName">            
                 <label for="player2name">Player O</label>
-                <input type="text" id="player2name" name="player1name" placeholder="Enter name"><br>
+                <input type="text" id="player2name" name="player1name" placeholder="Enter name" required><br>
             </div>
             <button class="startGame">START GAME</button>
         </form>
