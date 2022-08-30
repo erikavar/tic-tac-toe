@@ -85,23 +85,35 @@ const Gameboard = (() => {
 
         let player1;
         let player2;
+        let nameSwitchingPlaceholder;
 
         document.querySelector(".playAgain").addEventListener("click", function() {
-            displayTurn.textContent = `${player1.name} starts`;
+            nameSwitchingPlaceholder = player1.name;
+            player1.name = player2.name;
+            player2.name = nameSwitchingPlaceholder;
+            displayTurn.textContent = `${player1.name} (now playing as ${player1.symbol}) starts`;
         });
 
         document.querySelector(".resetter").addEventListener("click", function() {
-            displayTurn.textContent = `${player1.name} starts`;
+            nameSwitchingPlaceholder = player1.name;
+            player1.name = player2.name;
+            player2.name = nameSwitchingPlaceholder;
+            displayTurn.textContent = `${player1.name} (now playing as ${player1.symbol}) starts`;
         });
         
         //name popup
         document.querySelector(".startGame").addEventListener("click", function() {
+
+            if (document.getElementById("player1name").value ==="" || document.getElementById("player2name").value ==="") {
+                alert("Please enter names for both players.")
+            } else {            
             document.querySelector(".namePopup").classList.add("hideNamePopup");
         
             player1 = Player(document.getElementById("player1name").value, "X");
             player2 = Player(document.getElementById("player2name").value, "O");
 
             displayTurn.textContent = `${player1.name} starts`
+            }
         });
 
         let count = 0;
