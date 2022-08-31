@@ -7,14 +7,14 @@ const Player = (name, symbol) => {
     const playerWins = () => {
         setTimeout(() => {
             winnerPopup.classList.add("openWinnerPopup");
-            document.querySelector(".winText").textContent = `${name} wins! 🎉`;
+            winText.textContent = `${name} wins! 🎉`;
         }, 300);
     }
 
     const playersTied = () => {
         setTimeout(() => {
-            document.querySelector(".winnerPopup").classList.add("openWinnerPopup");
-            document.querySelector(".winText").textContent = "It's a tie!";
+            winnerPopup.classList.add("openWinnerPopup");
+            winText.textContent = "It's a tie!";
         }, 300);
     }
 
@@ -64,6 +64,7 @@ const Gameboard = (() => {
         document.querySelector(".close").addEventListener("click", function() {
             winnerPopup.classList.remove("openWinnerPopup");
             resetterBtn.classList.remove("noClicksAllowed");
+            document.querySelector(".overlay").classList.add("hideOverlay");
         });
         
         document.querySelector(".playAgain").addEventListener("click", function() {
@@ -75,10 +76,12 @@ const Gameboard = (() => {
             winnerPopup.classList.remove("openWinnerPopup");
             resetterBtn.textContent = "RESET";
             resetterBtn.classList.remove("noClicksAllowed");
+            document.querySelector(".overlay").classList.add("hideOverlay");
         });
 
         displayTurn.textContent = "GAME OVER";
 
+        document.querySelector(".overlay").classList.remove("hideOverlay");
     }
 
     const playGame = () => {
@@ -112,8 +115,13 @@ const Gameboard = (() => {
             player1 = Player(document.getElementById("player1name").value, "X");
             player2 = Player(document.getElementById("player2name").value, "O");
 
-            displayTurn.textContent = `${player1.name} starts`
+            document.querySelector(".overlay").classList.add("hideOverlay");
+
+            document.querySelector(".boardAndButton").classList.remove("hideBoardAndButton");
+
+            displayTurn.textContent = `${player1.name} starts`;
             }
+
         });
 
         let count = 0;
