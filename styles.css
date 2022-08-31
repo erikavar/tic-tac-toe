@@ -1,6 +1,6 @@
 html {
-    background-color: #b6c199;
-    color: #703f37;
+    background-color: #40536F;
+    color: #283445;
     font-family: 'Roboto', sans-serif;
     display: flex;
     align-items: center;
@@ -8,14 +8,26 @@ html {
     text-align: center;
 }
 
+.boardAndButton {
+    position: absolute; 
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    visibility: visible;
+}
+
+.hideBoardAndButton {
+    visibility: hidden;
+}
+
 #boardContainer {
-    margin-top: 100px;
     height: 300px;
     width: 300px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 3px;
 }
+
 
 .spot {
     background-color: white;
@@ -27,8 +39,13 @@ html {
     font-size: x-large;
 }
 
+.spot:hover {
+    background-color: #ECF0F4;
+}
+
 .noClicksAllowed {
     pointer-events: none;
+    cursor: none;
 }
 
 .spot:hover {
@@ -47,31 +64,44 @@ html {
 .resetter {
     font-family: 'Roboto', sans-serif;
     border: none;
-    background-color: #c29591;
+    background-color: #7D94B5    ;
     color: white;
     padding: 10px 20px;
 }
 
 .resetter:hover {
-    background-color: #c8b7a6;
+    background-color: #879CBA;
 }
 
 .resetter:active {
-    background-color: #703f37
+    background-color: #7089AD;
+    transform: translateY(1px);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hideOverlay {
+    visibility: hidden;
 }
 
 .namePopup {
     color: white;
-    background: #c29591;
-    position: absolute;
+    background: #7d94b5;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    width: 400px;
+    position: absolute; 
+    transform: translate(-50%, -50%);
     top: 40%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    padding: 0 30px 30px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    width: 100vw;
     visibility: visible;
+    padding: 15px 30px;
 }
 
 .hideNamePopup {
@@ -87,15 +117,19 @@ html {
 .instructions {
     font-size: 20x;
     font-weight: 400;
+    background-color: #7089AD;
     font-style: italic;
-    border: 1px dashed white;
     width: 300px;
+    border: 1px solid #99ABC4;
+    color: #E3E8EF;
     position: relative;
-    left: 35%;
+    margin: 10px auto;
+    padding: 5px 10px;
 }
 
 .playerName {
     padding: 8px 0px;
+    font-weight: 500;
 }
 
 input {
@@ -113,22 +147,22 @@ input:active {
 .startGame {
     font-family: 'Roboto', sans-serif;
     border: 1px solid white;
-    background-color: #c29591;
+    background-color: #7D94B5;
     color: white;
     padding: 10px 15px;
-    margin-top: 20px;
     position: relative;
-    bottom: -10px;
+    margin: 15px auto;
     width: 120px;
 }
 
 .startGame:hover {
-    background-color: #c8b7a6;
+    background-color: #879CBA;
     
 }
 
 .startGame:active {
-    background-color: #703f37
+    background-color: #7089AD;
+    transform: translateY(1px);
 }
 
 .winnerPopup {
@@ -161,7 +195,8 @@ input:active {
 .winnerPopup button {
     font-family: 'Roboto', sans-serif;
     border: none;
-    background-color: #c8b7a6;
+    border: 1px solid white;
+    background-color: #7D94B5;
     color: white;
     padding: 10px 20px;
     margin-top: 20px;
@@ -171,23 +206,17 @@ input:active {
 }
 
 .winnerPopup button:hover {
-    background-color: #c29591;
+    background-color: #879CBA;
 }
 
 .winnerPopup button:active {
-    background-color: #703f37
+    background-color: #7089AD;
 }
 
-/*
+.playAgain {
+    margin-right: 8px;
+}
 
-Beige: #c8b7a6
-
-Blue: #7d94b5
-
-Rose: #c29591
-
-Maroon: #703f37
-
-Green: #b6c199
-
-*/
+.close {
+    margin-left: 8px;
+}
