@@ -8,35 +8,39 @@
     <link rel="stylesheet" href="styles.css"></link>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="boardContainer">
-        <div id="0" class="spot"></div>
-        <div id="1" class="spot">&nbsp;</div>
-        <div id="2" class="spot">&nbsp;</div>
-        <div id="3" class="spot">&nbsp;</div>
-        <div id="4" class="spot">&nbsp;</div>
-        <div id="5" class="spot">&nbsp;</div>
-        <div id="6" class="spot">&nbsp;</div>
-        <div id="7" class="spot">&nbsp;</div>
-        <div id="8" class="spot">&nbsp;</div>
+    <div class="boardAndButton  htmlhideBoardAndButton">
+        <div id="boardContainer">
+            <div id="0" class="spot"></div>
+            <div id="1" class="spot">&nbsp;</div>
+            <div id="2" class="spot">&nbsp;</div>
+            <div id="3" class="spot">&nbsp;</div>
+            <div id="4" class="spot">&nbsp;</div>
+            <div id="5" class="spot">&nbsp;</div>
+            <div id="6" class="spot">&nbsp;</div>
+            <div id="7" class="spot">&nbsp;</div>
+            <div id="8" class="spot">&nbsp;</div>
+        </div>
+        <br>
+        <div class="turnDisplayer">&nbsp;</div>
+        <br>
+        <button class="resetter">RESET</button>
     </div>
-    <br>
-    <div class="turnDisplayer">&nbsp;</div>
-    <br>
-    <button class="resetter">RESET</button>
+   
+    <div class="overlay"></div>
 
     <div class="namePopup">
         <form class="nameForm" >
             <div class="enterNames">Enter player names to start a game of tic tac toe!</div>
             <div class="instructions">Player X starts ☝️ <br> Symbols will switch each round 🔄</div>
             <div class="playerName">
-                <label for="player1name">Player X</label>
+                <label for="player1name">PLAYER X</label>
                 <input type="text" id="player1name" name="player1name" placeholder="Enter name" required><br>
             </div>
             <div class="playerName">            
-                <label for="player2name">Player O</label>
+                <label for="player2name">PLAYER O</label>
                 <input type="text" id="player2name" name="player1name" placeholder="Enter name" required><br>
             </div>
             <button class="startGame">START GAME</button>
