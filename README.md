@@ -4,12 +4,13 @@ This is a browser 2-player tic tac toe game. Players enter their names before st
 
 Built using Javascript and HTML/CSS.
 
-###### What I Learned
-
-JS
-* Factory functions and the module pattern/IIFE
-* Making variables from one module available to another 
+## What I Learned
 
 HTML/CSS
 * Putting `&nbsp;` in divs so that they are displayed even if they are empty
 * Using `visibility` CSS property to show or hide elements
+
+JS
+* Factory functions and the module pattern/IIFE
+* Making variables from one module available to another 
+* Using `String.fromCharCode(160)` to select `$nbsp`
